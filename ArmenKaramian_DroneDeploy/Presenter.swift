@@ -18,11 +18,18 @@ class Presenter : ViewDelegate
 {
 	public static let shared = Presenter()
 	
+	
+	public var logout = false
 	private let router : Router
 
 	init()
 	{
 		router = Router()
+	}
+	
+	func setLoginScreen(_login : LoginScreen)
+	{
+		router.setLoginScreen(_login: _login)
 	}
 	
 	///login screen
@@ -33,51 +40,17 @@ class Presenter : ViewDelegate
 		return router.loginButtonPressed()
 	}
 	
-	func getLoginScreenText() -> String
-	{
-		return Interactor.shared.getLoginScreenText()
-	}
-	
-	func getLoginButtonText() -> String
-	{
-		return Interactor.shared.getLoginButtonText()
-	}
-
-	////////// page 1
-	func getPage1Text() -> String
-	{
-		return Interactor.shared.getPage1Text()
-	}
-	
-	func getPage2ButtonText() -> String
-	{
-		return Interactor.shared.getPage2ButtonText()
-	}
-
-	
 	//////// page 2
 	func pushPage2Pressed() -> Page2
 	{
 		print("push page 2 pressed")
 		return router.pushPage2Pressed()
 	}
-		
-	func getPage2Text() -> String
-	{
-		return Interactor.shared.getPage2Text()
-	}
-
 	
 	//////////logout
-	func logoutButtonPressed() -> LoginScreen
+	func logoutButtonPressed()
 	{
 		print("logout pressed")
-		return router.logoutButtonPressed()
+		router.logoutButtonPressed()
 	}
-
-	func getLogoutButtonText() -> String
-	{
-		return Interactor.shared.getLogoutButtonText()
-	}
-
 }

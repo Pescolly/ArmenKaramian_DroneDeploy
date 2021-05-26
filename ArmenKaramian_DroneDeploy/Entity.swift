@@ -7,6 +7,11 @@
 
 import UIKit
 
+/*
+i'm pretty much scrounging for any data that can be fed into the app
+so there are some ridiculous things in here
+*/
+
 class Entity
 {
 	public static let shared = Entity()
