@@ -72,21 +72,31 @@ struct Page1: View
 	{
 		NavigationView
 		{
-			VStack
+			VStack(alignment: .center, spacing: 10)
 			{
-				Button(delegate.getLogoutButtonText()){
-					loginOnScreen.toggle()
-				 }
-				 .fullScreenCover(isPresented: $loginOnScreen) {
-					 delegate.logoutButtonPressed()
-				 }
-				 .frame(width: 200, height: 30, alignment: .center)
-				 .background(Color.blue)
-				 .cornerRadius(40)
-				 .foregroundColor(Color.white)
+				HStack
+				{
+					Button(delegate.getLogoutButtonText()){
+						loginOnScreen.toggle()
+					 }
+					 .fullScreenCover(isPresented: $loginOnScreen) {
+						 delegate.logoutButtonPressed()
+					 }
+					 .frame(width: 100, height: 30, alignment: .center)
+					 .background(Color.blue)
+					 .cornerRadius(40)
+					 .foregroundColor(Color.white)
+					.padding(10)
+					
+				}
+				.frame(maxWidth: .infinity, alignment: .trailing)
 				
-
+				Spacer(minLength: 100)
+				
 				Text("Welcome to Page 1")
+					.foregroundColor(.black)
+				
+				Spacer(minLength: 100)
 				
 				NavigationLink(
 					destination: delegate.pushPage2Pressed(),
@@ -98,7 +108,9 @@ struct Page1: View
 							.cornerRadius(40)
 							.foregroundColor(Color.white)
 					})
+				Spacer(minLength: 400)
 			}
+//			.frame(maxWidth: .infinity, maxHeight: .infinity)
 		}
 	}
 }
@@ -115,19 +127,31 @@ struct Page2: View
 	
 	var body: some View
 	{
-		Button(delegate.getLogoutButtonText()){
-			loginOnScreen.toggle()
-		 }
-		 .fullScreenCover(isPresented: $loginOnScreen) {
-			 delegate.logoutButtonPressed()
-		 }
-		 .frame(width: 200, height: 30, alignment: .center)
-		 .background(Color.blue)
-		 .cornerRadius(40)
-		 .foregroundColor(Color.white)
+		VStack
+		{
+			HStack
+			{
+				Button(delegate.getLogoutButtonText()){
+					loginOnScreen.toggle()
+				 }
+				 .fullScreenCover(isPresented: $loginOnScreen) {
+					 delegate.logoutButtonPressed()
+				 }
+				 .frame(width: 100, height: 30, alignment: .center)
+				 .background(Color.blue)
+				 .cornerRadius(40)
+				 .foregroundColor(Color.white)
+				.padding(10)
+			}
+			.frame(maxWidth: .infinity, alignment: .trailing)
+			
+			Spacer(minLength: 300)
+			
+			Text(delegate.getPage2Text())
+				.foregroundColor(.black)
 
-		
-		Text(delegate.getPage2Text())
+			Spacer(minLength: 360)
+		}
 	}
 }
 
@@ -135,12 +159,12 @@ struct Page2: View
 /////////////////
 
 
-//struct ContentView_Previews: PreviewProvider
-//{
-//    static var previews: some View
-//	{
+struct ContentView_Previews: PreviewProvider
+{
+    static var previews: some View
+	{
 //		LoginScreen(presenter: <#Presenter#>)
-//		Page1()
+		Page1(presenter: Presenter.shared)
 //		Page2()
-//    }
-//}
+    }
+}
