@@ -14,7 +14,7 @@ struct ArmenKaramian_DroneDeployApp: App
 	{
 		WindowGroup
 		{
-			LoginScreen(presenter: Presenter.shared)
+			LoginScreen()
 		}
     }
 }

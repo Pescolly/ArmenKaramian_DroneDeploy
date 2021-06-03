@@ -18,23 +18,17 @@ class Router
 
 	func logoutButtonPressed() -> LoginScreen
 	{
-		let l = LoginScreen(presenter: Presenter.shared)
-		login = l
-		return l
+		return LoginScreen()
 	}
 	
 	func loginButtonPressed() -> Page1
 	{
-		let p =  Page1(presenter: Presenter.shared)
-		page1 = p
-		return p
+		return  Page1()
 	}
 		
 	func pushPage2Pressed() -> Page2
 	{
-		let p = Page2(presenter: Presenter.shared)
-		page2 = p
-		return p
+		return Page2()
 	}
 		
 }

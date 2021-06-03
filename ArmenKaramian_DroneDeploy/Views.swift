@@ -29,9 +29,9 @@ struct LoginScreen: View
 	@State private var page1OnScreen = false
 	public var delegate : ViewDelegate
 	
-	init(presenter : Presenter)
+	init()
 	{
-		delegate = presenter
+		delegate = Presenter.shared
 	}
 		
     var body: some View
@@ -63,9 +63,9 @@ struct Page1: View
 	
 	public var delegate : ViewDelegate
 	
-	init(presenter : Presenter)
+	init()
 	{
-		delegate = presenter
+		delegate = Presenter.shared
 	}
 	
 	var body: some View
@@ -74,23 +74,6 @@ struct Page1: View
 		{
 			VStack(alignment: .center, spacing: 10)
 			{
-				HStack
-				{
-					Button(delegate.getLogoutButtonText()){
-						loginOnScreen.toggle()
-					 }
-					 .fullScreenCover(isPresented: $loginOnScreen) {
-						 delegate.logoutButtonPressed()
-					 }
-					 .frame(width: 100, height: 30, alignment: .center)
-					 .background(Color.blue)
-					 .cornerRadius(40)
-					 .foregroundColor(Color.white)
-					.padding(10)
-					
-				}
-				.frame(maxWidth: .infinity, alignment: .trailing)
-				
 				Spacer(minLength: 100)
 				
 				Text("Welcome to Page 1")
@@ -110,7 +93,24 @@ struct Page1: View
 					})
 				Spacer(minLength: 400)
 			}
-//			.frame(maxWidth: .infinity, maxHeight: .infinity)
+			.navigationBarItems(trailing:
+				HStack
+				{
+					Button(delegate.getLogoutButtonText()){
+						loginOnScreen.toggle()
+					 }
+					 .fullScreenCover(isPresented: $loginOnScreen) {
+						 delegate.logoutButtonPressed()
+					 }
+					 .frame(width: 100, height: 30, alignment: .center)
+					 .background(Color.blue)
+					 .cornerRadius(40)
+					 .foregroundColor(Color.white)
+					 .padding(10)
+
+				}
+			)
+
 		}
 	}
 }
@@ -120,9 +120,9 @@ struct Page2: View
 	public var delegate : ViewDelegate
 	@State private var loginOnScreen = false
 	
-	init(presenter : Presenter)
+	init()
 	{
-		delegate = presenter
+		delegate = Presenter.shared
 	}
 	
 	var body: some View
@@ -141,7 +141,7 @@ struct Page2: View
 				 .background(Color.blue)
 				 .cornerRadius(40)
 				 .foregroundColor(Color.white)
-				.padding(10)
+				 .padding(10)
 			}
 			.frame(maxWidth: .infinity, alignment: .trailing)
 			
@@ -163,8 +163,6 @@ struct ContentView_Previews: PreviewProvider
 {
     static var previews: some View
 	{
-//		LoginScreen(presenter: <#Presenter#>)
-		Page1(presenter: Presenter.shared)
-//		Page2()
+		LoginScreen()
     }
 }
