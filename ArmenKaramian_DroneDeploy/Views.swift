@@ -118,6 +118,7 @@ struct Page1: View
 struct Page2: View
 {
 	public var delegate : ViewDelegate
+	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 	@State private var loginOnScreen = false
 	
 	init()
@@ -129,8 +130,28 @@ struct Page2: View
 	{
 		VStack
 		{
+			Spacer(minLength: 300)
+			
+			Text(delegate.getPage2Text())
+				.foregroundColor(.black)
+
+			Spacer(minLength: 360)
+		}
+		.navigationBarBackButtonHidden(true)
+		.navigationBarItems(leading:
 			HStack
 			{
+				Button("< Back"){
+					self.presentationMode.wrappedValue.dismiss()
+				 }
+				 .frame(width: 100, height: 30, alignment: .center)
+				 .background(Color.blue)
+				 .cornerRadius(40)
+				 .foregroundColor(Color.white)
+				 .padding(10)
+
+				Spacer(minLength: 118)
+
 				Button(delegate.getLogoutButtonText()){
 					loginOnScreen.toggle()
 				 }
@@ -143,15 +164,7 @@ struct Page2: View
 				 .foregroundColor(Color.white)
 				 .padding(10)
 			}
-			.frame(maxWidth: .infinity, alignment: .trailing)
-			
-			Spacer(minLength: 300)
-			
-			Text(delegate.getPage2Text())
-				.foregroundColor(.black)
-
-			Spacer(minLength: 360)
-		}
+		)
 	}
 }
 
